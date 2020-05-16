@@ -1,4 +1,6 @@
-package com.example.util.string;
+package com.example.quartz.common.core.text;
+
+import com.example.quartz.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -9,8 +11,6 @@ import java.util.Set;
 
 /**
  * 类型转换器
- *
- * @author ruoyi
  */
 public class Convert {
     /**
@@ -266,7 +266,7 @@ public class Convert {
      * 转换为Integer数组<br>
      *
      * @param split 分隔符
-     * @param str   被转换的值
+     * @param split 被转换的值
      * @return 结果
      */
     public static Integer[] toIntArray(String split, String str) {
@@ -316,7 +316,7 @@ public class Convert {
      * 转换为String数组<br>
      *
      * @param split 分隔符
-     * @param str   被转换的值
+     * @param split 被转换的值
      * @return 结果
      */
     public static String[] toStrArray(String split, String str) {
@@ -474,12 +474,17 @@ public class Convert {
         valueStr = valueStr.trim().toLowerCase();
         switch (valueStr) {
             case "true":
-            case "yes":
-            case "ok":
-            case "1":
                 return true;
             case "false":
+                return false;
+            case "yes":
+                return true;
+            case "ok":
+                return true;
             case "no":
+                return false;
+            case "1":
+                return true;
             case "0":
                 return false;
             default:
@@ -602,7 +607,7 @@ public class Convert {
             return new BigDecimal((Long) value);
         }
         if (value instanceof Double) {
-            return BigDecimal.valueOf((Double) value);
+            return new BigDecimal((Double) value);
         }
         if (value instanceof Integer) {
             return new BigDecimal((Integer) value);
@@ -669,8 +674,7 @@ public class Convert {
         if (obj instanceof String) {
             return (String) obj;
         } else if (obj instanceof byte[] || obj instanceof Byte[]) {
-            assert obj instanceof Byte[];
-            return str(obj, charset);
+            return str((Byte[]) obj, charset);
         } else if (obj instanceof ByteBuffer) {
             return str((ByteBuffer) obj, charset);
         }
@@ -790,7 +794,7 @@ public class Convert {
      * @return 替换后的字符
      */
     public static String toDBC(String text, Set<Character> notConvertSet) {
-        char[] c = text.toCharArray();
+        char c[] = text.toCharArray();
         for (int i = 0; i < c.length; i++) {
             if (null != notConvertSet && notConvertSet.contains(c[i])) {
                 // 跳过不替换的字符
@@ -803,8 +807,9 @@ public class Convert {
                 c[i] = (char) (c[i] - 65248);
             }
         }
+        String returnString = new String(c);
 
-        return new String(c);
+        return returnString;
     }
 
     /**
@@ -821,23 +826,23 @@ public class Convert {
         String head = n < 0 ? "负" : "";
         n = Math.abs(n);
 
-        StringBuilder s = new StringBuilder();
+        String s = "";
         for (int i = 0; i < fraction.length; i++) {
-            s.append((digit[(int) (Math.floor(n * 10 * Math.pow(10, i)) % 10)] + fraction[i]).replaceAll("(零.)+", ""));
+            s += (digit[(int) (Math.floor(n * 10 * Math.pow(10, i)) % 10)] + fraction[i]).replaceAll("(零.)+", "");
         }
         if (s.length() < 1) {
-            s = new StringBuilder("整");
+            s = "整";
         }
         int integerPart = (int) Math.floor(n);
 
         for (int i = 0; i < unit[0].length && integerPart > 0; i++) {
-            StringBuilder p = new StringBuilder();
+            String p = "";
             for (int j = 0; j < unit[1].length && n > 0; j++) {
-                p.insert(0, digit[integerPart % 10] + unit[1][j]);
+                p = digit[integerPart % 10] + unit[1][j] + p;
                 integerPart = integerPart / 10;
             }
-            s.insert(0, p.toString().replaceAll("(零.)*零$", "").replaceAll("^$", "零") + unit[0][i]);
+            s = p.replaceAll("(零.)*零$", "").replaceAll("^$", "零") + unit[0][i] + s;
         }
-        return head + s.toString().replaceAll("(零.)*零元", "元").replaceFirst("(零.)+", "").replaceAll("(零.)+", "零").replaceAll("^整$", "零元整");
+        return head + s.replaceAll("(零.)*零元", "元").replaceFirst("(零.)+", "").replaceAll("(零.)+", "零").replaceAll("^整$", "零元整");
     }
 }

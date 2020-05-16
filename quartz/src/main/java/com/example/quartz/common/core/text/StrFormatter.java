@@ -1,9 +1,9 @@
-package com.example.util.string;
+package com.example.quartz.common.core.text;
+
+import com.example.quartz.util.StringUtils;
 
 /**
  * 字符串格式化
- *
- * @author ruoyi
  */
 public class StrFormatter {
     public static final String EMPTY_JSON = "{}";
