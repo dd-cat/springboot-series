@@ -1,22 +1,17 @@
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>登录</title>
-    <meta name="description" content="">
-    <!-- 360浏览器急速模式 -->
-    <meta name="renderer" content="webkit">
-    <!-- 避免IE使用兼容模式 -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
 </head>
-<body class="signin">
-    <form method="post" action="/login">
-        <h4 class="no-margins">登录：</h4>
-        <input type="text" name="username" class="form-control uname" placeholder="用户名" value="cj"    />
-        <input type="password" name="password" class="form-control pword" placeholder="密码"   value="123" />
-        <button>登录</button>
-    </form>
+<body>
+<form method="post" action="/login">
+    <h4>登录：</h4>
+    <input type="text" name="username" placeholder="用户名" value="admin"/>
+    <input type="password" name="password" placeholder="密码" value="123456"/>
+    <button>登录</button>
+</form>
 </body>
 </html>

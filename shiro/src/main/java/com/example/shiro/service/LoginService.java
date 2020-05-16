@@ -34,7 +34,7 @@ public class LoginService {
         Role role = new Role("1","admin",permissionsSet);
         Set<Role> roleSet = new HashSet<>();
         roleSet.add(role);
-        User user = new User("1","cj","2415b95d3203ac901e287b76fcef640b",roleSet);
+        User user = new User("1","admin","123456",roleSet);
         Map<String ,User> map = new HashMap<>();
         map.put(user.getUsername(), user);
 

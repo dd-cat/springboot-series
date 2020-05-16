@@ -26,7 +26,7 @@ public class ShiroConfig {
     public CustomRealm customRealm() {
         CustomRealm customRealm = new CustomRealm();
         // 告诉realm,使用credentialsMatcher加密算法类来验证密文
-        customRealm.setCredentialsMatcher(hashedCredentialsMatcher());
+        //customRealm.setCredentialsMatcher(hashedCredentialsMatcher());
         customRealm.setCachingEnabled(false);
         return customRealm;
     }
@@ -47,8 +47,6 @@ public class ShiroConfig {
         shiroFilterFactoryBean.setSecurityManager(securityManager);
         //登录
         shiroFilterFactoryBean.setLoginUrl("/login");
-        //登陆成功后的页面
-        shiroFilterFactoryBean.setSuccessUrl("/index");
         //认证不通过跳转
         shiroFilterFactoryBean.setUnauthorizedUrl("/error");
         //自定义过滤器
