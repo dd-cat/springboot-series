@@ -7,11 +7,17 @@ springboot-series
 |
 ├──coolq--QQ机器人 安装酷Q
 |
-├──quartz--quartz定时任务
+├──jpa
+|
+├──mongodb
 |
 ├──mybatis--mybatis配置 多数据源
 |
-├──redis--redis配置简单使用
+├──quartz--quartz定时任务
+|
+├──redis--redis配置工具类 简单使用
+|
+├──shiro--shiro简单使用
 |
 ├──util--工具类
 ```
