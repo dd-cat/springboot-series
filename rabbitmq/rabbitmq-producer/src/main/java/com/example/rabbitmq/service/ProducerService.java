@@ -1,5 +1,6 @@
 package com.example.rabbitmq.service;
 
+import com.example.rabbitmq.config.DelayRabbitConfig;
 import org.springframework.amqp.core.MessageDeliveryMode;
 import org.springframework.amqp.rabbit.connection.CorrelationData;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -19,7 +20,15 @@ public class ProducerService {
     @Autowired
     private ReturnCallbackService returnCallbackService;
 
-    public void sendMessage(String exchange, String routingKey, Object msg) {
+    /**
+     * 通用发送消息
+     *
+     * @param exchange   交换机
+     * @param routingKey 路由key
+     * @param msg        消息
+     * @param expiration 延迟时间
+     */
+    public void sendMessage(String exchange, String routingKey, Object msg, String expiration) {
 
         /**
          * 确保消息发送失败后可以重新返回到队列中
@@ -43,8 +52,11 @@ public class ProducerService {
         rabbitTemplate.convertAndSend(exchange, routingKey, msg,
                 message -> {
                     message.getMessageProperties().setDeliveryMode(MessageDeliveryMode.PERSISTENT);
+                    // 如果配置了 params.put("x-message-ttl", 5 * 1000); 那么这一句也可以省略,具体根据业务需要是声明 Queue 的时候就指定好延迟时间还是在发送自己控制时间
+                    message.getMessageProperties().setExpiration(expiration);
                     return message;
                 },
                 new CorrelationData(UUID.randomUUID().toString()));
     }
+
 }

@@ -14,8 +14,6 @@ public class RabbitMQConfig {
     public static final String QUEUE_A = "queue-a";
     public static final String ROUTINGKEY_A = "routing-key-A";
 
-
-
     /**
      * 设置交换机
      */

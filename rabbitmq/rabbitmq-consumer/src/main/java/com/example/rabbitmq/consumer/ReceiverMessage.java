@@ -1,5 +1,6 @@
 package com.example.rabbitmq.consumer;
 
+import com.example.rabbitmq.domain.Order;
 import com.rabbitmq.client.Channel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +12,7 @@ import org.springframework.messaging.MessageHeaders;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.Date;
 
 //import org.springframework.messaging.Message;
 
@@ -42,9 +44,22 @@ public class ReceiverMessage {
     }
 
 
-    //是否重复消费失败
-    private void isFlag(MessageHeaders headers, Channel channel, Long tag) throws IOException {
-
+    @RabbitListener(queues = {"user.order.queue"})
+    public void orderDelayQueue(Order order, Message message, Channel channel) throws IOException {
+        log.info("###########################################");
+        MessageHeaders headers = message.getHeaders();
+        Long tag = (Long) headers.get(AmqpHeaders.DELIVERY_TAG);
+        log.info("【orderDelayQueue 监听的消息】 - 【消费时间】 - [{}]- 【订单内容】 - [{}]", new Date(), order.toString());
+        if (order.getOrderStatus() == 0) {
+            order.setOrderStatus(2);
+            log.info("【该订单未支付，取消订单】" + order.toString());
+        } else if (order.getOrderStatus() == 1) {
+            log.info("【该订单已完成支付】");
+        } else if (order.getOrderStatus() == 2) {
+            log.info("【该订单已取消】");
+        }
+        log.info("###########################################");
+        channel.basicAck(tag, false);
     }
 
 }

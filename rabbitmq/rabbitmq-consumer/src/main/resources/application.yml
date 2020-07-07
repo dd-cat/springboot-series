@@ -14,5 +14,15 @@ spring:
         max-concurrency: 10
         prefetch: 1
         acknowledge-mode: manual
+        # 重试策略相关配置
+        retry:
+          enabled: true #是否支持重试
+          max-attempts: 5
+          stateless: false
+          #时间策略乘数因子
+          multiplier: 1.0
+          initial-interval: 1000ms
+          max-interval: 10000ms
+        default-requeue-rejected: true
     template:
       mandatory: true
