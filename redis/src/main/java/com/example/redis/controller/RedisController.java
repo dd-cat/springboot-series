@@ -13,7 +13,6 @@ import javax.annotation.Resource;
  */
 @RestController
 public class RedisController {
-    private static int ExpireTime = 60;   // redis中存储的过期时间60s
 
     @Resource
     private RedisUtil redisUtil;
@@ -30,6 +29,8 @@ public class RedisController {
 
     @RequestMapping("expire")
     public boolean expire(String key) {
-        return redisUtil.expire(key, ExpireTime);
+        // redis中存储的过期时间60s
+        int expireTime = 60;
+        return redisUtil.expire(key, expireTime);
     }
 }
