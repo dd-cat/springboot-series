@@ -5,19 +5,23 @@
 ```
 springboot-series
 |
-├──coolq--QQ机器人 安装酷Q
+├──coolq --QQ机器人 安装酷Q
 |
-├──jpa
+├──jpa --jpa简单使用
 |
-├──mongodb
+├──mongodb --mongodb简单使用
 |
-├──mybatis--mybatis配置 多数据源
+├──mybatis --mybatis使用+多数据源配置  logback-spring.xml日志配置
 |
-├──quartz--quartz定时任务
+├──mybatis --mybatis plus使用
 |
-├──redis--redis配置工具类 简单使用
+├──quartz --quartz定时任务
 |
-├──shiro--shiro简单使用
+├──rabbitmq --rabbitmq使用
 |
-├──util--工具类
+├──redis --redis配置工具类 简单使用
+|
+├──shiro --shiro简单使用
+|
+├──util --工具类
 ```

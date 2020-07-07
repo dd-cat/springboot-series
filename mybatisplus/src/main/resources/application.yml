@@ -1,0 +1,27 @@
+server:
+  port: 9004
+
+spring:
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=convertToNull&useSSL=true&serverTimezone=GMT%2B8
+    username: root
+    password: root
+
+# Mybatis配置
+# 这里使用mybatis  不要用mybatis-plus
+mybatis:
+  # 搜索指定包别名
+  typeAliasesPackage: com.erp.system
+  # 配置mapper的扫描，找到所有的mapper.xml映射文件
+  mapperLocations: classpath:mapper/**/*.xml
+
+#控制台打印sql日志
+logging:
+  level:
+    com.erp.system.mapper: debug
+
