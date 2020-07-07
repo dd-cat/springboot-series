@@ -47,7 +47,7 @@ public class RabbitMQController {
     public void sendDelay() {
         Order order = new Order();
         order.setOrderId("123456");
-        order.setOrderName("张三");
+        order.setOrderName("一加9");
         order.setOrderStatus(1);
         log.info("【订单生成时间】" + new Date().toString() + "【1分钟后检查订单是否已经支付】" + order.toString());
 

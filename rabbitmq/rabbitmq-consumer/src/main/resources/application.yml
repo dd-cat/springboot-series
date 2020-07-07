@@ -6,13 +6,16 @@ spring:
     port: 5672
     username: guest
     password: guest
-    publisher-confirm-type: correlated
-    publisher-returns: true
+    #消费端配置
     listener:
       simple:
+        # 同一个队列启动几个消费者
         concurrency: 5
+        # 消费者最大数量
         max-concurrency: 10
+        # 限流 多数据量同时只能过来一条
         prefetch: 1
+        #手动确认
         acknowledge-mode: manual
         # 重试策略相关配置
         retry:
