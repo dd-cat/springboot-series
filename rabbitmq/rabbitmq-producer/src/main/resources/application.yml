@@ -1,5 +1,3 @@
-server:
-  port: 9003
 spring:
   #RabbitMQ
   rabbitmq:
@@ -9,6 +7,5 @@ spring:
     password: guest
     #必须配置这个才会确认回调
     publisher-confirm-type: correlated
+    #消息投递到队列失败是否回调
     publisher-returns: true
-    template:
-      mandatory: true
