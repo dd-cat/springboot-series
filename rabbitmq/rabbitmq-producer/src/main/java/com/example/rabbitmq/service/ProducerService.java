@@ -26,9 +26,8 @@ public class ProducerService {
      * @param exchange   交换机
      * @param routingKey 路由key
      * @param msg        消息
-     * @param expiration 延迟时间
      */
-    public void sendMessage(String exchange, String routingKey, Object msg, String expiration) {
+    public void sendMessage(String exchange, String routingKey, Object msg) {
 
         /**
          * 确保消息发送失败后可以重新返回到队列中
@@ -53,7 +52,7 @@ public class ProducerService {
                 message -> {
                     message.getMessageProperties().setDeliveryMode(MessageDeliveryMode.PERSISTENT);
                     // 如果配置了 params.put("x-message-ttl", 5 * 1000); 那么这一句也可以省略,具体根据业务需要是声明 Queue 的时候就指定好延迟时间还是在发送自己控制时间
-                    message.getMessageProperties().setExpiration(expiration);
+                    message.getMessageProperties().setExpiration(1000 * 60 + "");
                     return message;
                 },
                 new CorrelationData(UUID.randomUUID().toString()));

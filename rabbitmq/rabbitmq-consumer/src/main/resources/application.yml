@@ -17,15 +17,14 @@ spring:
         prefetch: 1
         #手动确认
         acknowledge-mode: manual
-        # 重试策略相关配置
-        retry:
-          enabled: true #是否支持重试
-          max-attempts: 5
-          stateless: false
-          #时间策略乘数因子
-          multiplier: 1.0
-          initial-interval: 1000ms
-          max-interval: 10000ms
-        default-requeue-rejected: true
-    template:
-      mandatory: true
+  # Redis数据库索引（默认为0）
+  redis:
+    database: 0
+    # Redis服务器地址
+    host: 192.168.0.150
+    # Redis服务器连接端口
+    port: 6379
+    # Redis服务器连接密码（默认为空）
+    password:
+    # 链接超时时间 单位 ms（毫秒）
+    timeout: 3000

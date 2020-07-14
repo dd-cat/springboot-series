@@ -25,7 +25,7 @@ public class RabbitMQController {
      */
     @GetMapping("sendOne")
     public String sendOne() {
-        producerService.sendMessage("exchange-A", "routing-key-A", "hello 你好！！！", "0");
+        producerService.sendMessage("exchange-A", "routing-key-A", "hello 你好！！！");
         return SUCCESS;
     }
 
@@ -35,7 +35,7 @@ public class RabbitMQController {
     @GetMapping("send")
     public String send() {
         for (int i = 1; i <= 10; i++) {
-            producerService.sendMessage("exchange-A", "routing-key-A", "这是发送的第" + i + "条消息", null);
+            producerService.sendMessage("exchange-A", "routing-key-A", "这是发送的第" + i + "条消息");
         }
         return SUCCESS;
     }
@@ -44,15 +44,13 @@ public class RabbitMQController {
      * 延迟队列发送
      */
     @GetMapping("sendDelay")
-    public void sendDelay() {
+    public String sendDelay() {
         Order order = new Order();
         order.setOrderId("123456");
         order.setOrderName("一加9");
         order.setOrderStatus(1);
         log.info("【订单生成时间】" + new Date().toString() + "【1分钟后检查订单是否已经支付】" + order.toString());
-
-        producerService.sendMessage(DelayRabbitConfig.ORDER_DELAY_EXCHANGE, DelayRabbitConfig.ORDER_DELAY_ROUTING_KEY, order, 60 * 1000 + "");
-
-
+        producerService.sendMessage(DelayRabbitConfig.ORDER_DELAY_EXCHANGE, DelayRabbitConfig.ORDER_DELAY_ROUTING_KEY, order);
+        return SUCCESS;
     }
 }
