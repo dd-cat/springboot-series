@@ -3,6 +3,7 @@ package com.example.mybatisplus.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.example.mybatisplus.domain.User;
 import com.example.mybatisplus.service.UserService;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,6 +44,7 @@ public class UserController {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         //设置查询条件
         queryWrapper.eq("id", id);
+        PageHelper.startPage(2, 3);
         return userService.list(queryWrapper);
     }
 

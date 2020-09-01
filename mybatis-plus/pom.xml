@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>mybatisplus</artifactId>
+    <artifactId>mybatis-plus</artifactId>
 
     <dependencies>
         <dependency>
@@ -35,6 +35,14 @@
             <artifactId>mybatis-spring-boot-autoconfigure</artifactId>
             <version>1.3.2</version>
         </dependency>
+
+        <!-- pagehelper 分页插件 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.12</version>
+        </dependency>
+
     </dependencies>
 
     <build>
