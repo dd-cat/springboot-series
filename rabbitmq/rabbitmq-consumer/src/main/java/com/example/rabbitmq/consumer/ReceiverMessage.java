@@ -73,17 +73,21 @@ public class ReceiverMessage {
         Long tag = (Long) headers.get(AmqpHeaders.DELIVERY_TAG);
         try {
             //TODO 具体业务
-            String msgId = (String) headers.get("spring_returned_message_correlation");//发送者 需发送一个唯一id
+
+            //发送者 需发送一个唯一id
+            String msgId = (String) headers.get("spring_returned_message_correlation");
             if (redisTemplate.opsForHash().entries("test").containsKey(msgId)) {
                 //redis 中包含该 key，说明该消息已经被消费过
                 log.info(msgId + ":消息已经被消费");
-                channel.basicAck(tag, false);//确认消息已消费
+                //确认消息已消费
+                channel.basicAck(tag, false);
                 return;
             }
             //添加到redis
             redisTemplate.opsForHash().put("test", msgId, "testDelay");
 
-            int i = 1 / 0;//走到这里报错
+            //走到这里报错
+            int i = 1 / 0;
 
             //手动确认消息
             channel.basicAck(tag, false);

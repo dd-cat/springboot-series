@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
 @Configuration
-public class RabbitMQConfig {
+public class DirectRabbitMQConfig {
     public static final String EXCHANGE_A = "exchange-A";
     public static final String QUEUE_A = "queue-a";
     public static final String ROUTINGKEY_A = "routing-key-A";
