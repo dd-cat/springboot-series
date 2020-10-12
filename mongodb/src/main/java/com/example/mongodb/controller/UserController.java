@@ -6,9 +6,7 @@ import org.springframework.data.mongodb.core.aggregation.Aggregation;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -24,22 +22,34 @@ public class UserController {
     @Resource
     private MongoTemplate mongoTemplate;
 
-    // 添加用户
+    /**
+     * 添加用户
+     *
+     * @param user 用户信息
+     */
     @GetMapping("save")
     public void insertUser(User user) {
         mongoTemplate.save(user);
     }
 
-    // 根据id获取用户
+    /**
+     * 根据id获取用户
+     *
+     * @param id 用户id
+     * @return
+     */
     @GetMapping("select/{id}")
     public User getUserById(@PathVariable("id") Integer id) {
         Query query = new Query(Criteria.where("id").is(id));
         return mongoTemplate.findOne(query, User.class);
     }
 
-
-    // 更新用户
-    @GetMapping("update")
+    /**
+     * 更新用户
+     *
+     * @param user 用户信息
+     */
+    @PutMapping("update")
     public void updateUser(User user) {
         Query query = new Query(Criteria.where("id").is(user.getId()));
 
@@ -50,8 +60,12 @@ public class UserController {
         mongoTemplate.updateFirst(query, update, User.class);
     }
 
-    // 删除用户
-    @GetMapping("delete")
+    /**
+     * 删除用户
+     *
+     * @param id 用户id
+     */
+    @DeleteMapping("delete")
     public void deleteUser(Integer id) {
         Query query = new Query(Criteria.where("id").is(id));
         mongoTemplate.remove(query, User.class);

@@ -1,14 +1,11 @@
 package com.example.mybatisplus.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.example.mybatisplus.domain.User;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.example.mybatisplus.entity.User;
 import com.example.mybatisplus.service.UserService;
-import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class UserController {
@@ -16,39 +13,43 @@ public class UserController {
     private UserService userService;
 
     /**
-     * 添加
+     * 用户列表
      *
-     * @param user
-     * @return
+     * @param page 分页
+     * @param user 用户
+     * @return Page<User>
      */
-    @GetMapping("save")
-    public String save(User user) {
-        userService.save(user);
-        return "success";
+    @GetMapping("list")
+    public Page<User> list(Page page, User user) {
+        return userService.page(page, Wrappers.query(user));
     }
 
     /**
-     * 根据id主键删除
+     * 添加
      *
-     * @param id
-     * @return
+     * @param user 用户
      */
-    @GetMapping("del")
-    public String del(String id) {
+    @PostMapping("save")
+    public void save(User user) {
+        userService.save(user);
+    }
+
+    /**
+     * 删除
+     *
+     * @param id 用户id
+     */
+    @DeleteMapping("del")
+    public void del(String id) {
         userService.removeById(id);
-        return "success";
     }
 
-    @GetMapping("list")
-    public List<User> list(String id) {
-        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        //设置查询条件
-        queryWrapper.eq("id", id);
-        PageHelper.startPage(2, 3);
-        return userService.list(queryWrapper);
-    }
-
-    @GetMapping("update")
+    /**
+     * 修改
+     *
+     * @param user 用户
+     */
+    @PutMapping("update")
     public String update(User user) {
         userService.updateById(user);
         return "success";

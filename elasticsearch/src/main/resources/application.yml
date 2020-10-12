@@ -1,4 +1,4 @@
-spring:
-  elasticsearch:
-    rest:
-      uris: http://192.168.21.128:9200
+#spring:
+#  elasticsearch:
+#    rest:
+#      uris: http://127.0.0.1:9300

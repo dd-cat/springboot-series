@@ -13,11 +13,12 @@ import java.util.List;
  * @Description:
  */
 public interface BookRepository extends JpaRepository<Book, Long> {
-    //rel 表示接口查询中，这个方法的 key
 
     /**
      * rel 表示接口查询中，这个方法的 key
      * path 表示请求路径
+     * @param author
+     * @return
      */
     @RestResource(rel = "byauthor", path = "byauthor")
     List<Book> findBookByAuthorContaining(@Param("author") String author);

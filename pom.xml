@@ -5,14 +5,13 @@
     <packaging>pom</packaging>
 
     <modules>
+        <module>coolq</module>
         <module>mybatis</module>
+        <module>mybatis-plus</module>
         <module>redis</module>
         <module>shiro</module>
-        <module>util</module>
-        <module>coolq</module>
         <module>jpa</module>
         <module>elasticsearch</module>
-        <module>quartz</module>
         <module>rabbitmq</module>
     </modules>
 
@@ -32,10 +31,21 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        <maven-compiler-plugin.version>3.5</maven-compiler-plugin.version>
+        <hutool.version>5.4.1</hutool.version>
     </properties>
 
     <dependencies>
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+        <!-- hutool工具类 -->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

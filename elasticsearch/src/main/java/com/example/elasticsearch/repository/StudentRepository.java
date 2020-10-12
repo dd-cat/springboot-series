@@ -1,6 +1,6 @@
 package com.example.elasticsearch.repository;
 
-import com.example.elasticsearch.pojo.Student;
+import com.example.elasticsearch.entity.Student;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
@@ -11,6 +11,19 @@ import org.springframework.data.elasticsearch.repository.ElasticsearchRepository
  * @Description:
  */
 public interface StudentRepository extends ElasticsearchRepository<Student,Long> {
+    /**
+     *
+     * @param firstName
+     * @param pageable
+     * @return
+     */
     Page<Student> findByFirstName(String firstName, Pageable pageable);
+
+    /**
+     *
+     * @param content
+     * @param pageable
+     * @return
+     */
     Page<Student> findByIntroduceLike(String content,Pageable pageable);
 }
